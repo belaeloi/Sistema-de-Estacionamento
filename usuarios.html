@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerenciar Usuários</title>
+  <script src="usuarios.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+ <style>
+    /* Modal fundo escuro com animação */
+    #formulario-usuario.modal-bg {
+      background: rgba(12, 3, 144, 0.461);
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+
+      /* animação */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #formulario-usuario.modal-bg.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #formulario-usuario.modal-bg > div {
+      max-width: 400px;
+      width: 90%;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 25px rgba(18, 2, 138, 0.25);
+      transform: translateY(-30px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #formulario-usuario.modal-bg.show > div {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+
+  
+</head>
+
+<nav style="background:#000000; padding: 1rem;">
+  <a href="index.html" style="color:white; margin-right:10px;">Menu</a>
+  <a href="usuarios.html" style="color:white; margin-right:10px;">Administradores</a>
+  <a href="registros.html" style="color:white; margin-right:10px;">Registros</a>
+  <a href="vagas.html" style="color:white;">Vagas</a>
+
+</nav>
+
+
+<body class="bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold mb-6">👤 Usuários</h1>
+
+  <button
+    onclick="abrirFormulario()"
+    class="mb-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+  >
+    ➕ Novo Usuário
+  </button>
+
+  <table class="min-w-full bg-white shadow-md rounded mb-6">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="py-3 px-4 text-left">Nome</th>
+        <th class="py-3 px-4 text-left">E-mail</th>
+        <th class="py-3 px-4 text-left">Tipo</th>
+        <th class="py-3 px-4 text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-usuarios">
+      <!-- Os usuários serão inseridos aqui com JS -->
+    </tbody>
+  </table>
+
+  <!-- Formulário de cadastro/edição -->
+  <div id="formulario-usuario" class="hidden bg-white p-6 rounded shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Cadastrar/Editar Usuário</h2>
+    <form onsubmit="salvarUsuario(event)">
+      <input type="hidden" id="usuario-id">
+      <div class="mb-4">
+        <label class="block text-gray-700">Nome</label>
+        <input id="usuario-nome" type="text" required class="w-full border p-2 rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">E-mail</label>
+        <input id="usuario-email" type="email" required class="w-full border p-2 rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Tipo</label>
+        <select id="usuario-tipo" class="w-full border p-2 rounded" required>
+          <option value="admin">Administrador</option>
+          <option value="funcionario">Funcionário</option>
+        </select>
+      </div>
+      <div class="flex justify-between">
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Salvar</button>
+        <button type="button" onclick="fecharFormulario()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

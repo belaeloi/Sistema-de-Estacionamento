@@ -1,0 +1,256 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Variáveis para tema escuro */
+:root {
+  --primary: #121212;
+  --primary-dark: #1e1e1e;
+  --danger: #e74c3c;
+  --danger-dark: #c0392b;
+  --success: #2ecc71;
+  --success-dark: #27ae60;
+  --warning: #e67e22;
+  --warning-dark: #d35400;
+  --background: #1a1a1a;
+  --text-light: #f1f1f1;
+  --text-muted: #bbb;
+}
+body {
+  background-image: url("fundo\ preto.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.container {
+  width: 95%;
+  max-width: 1080px;
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--primary-dark);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar */
+.navbar {
+  background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat, linear-gradient(90deg, #000000, #1a1a1a);
+  padding: 16px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  margin-bottom: 40px;
+}
+
+.navbar h1 {
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 28px);
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* Cabeçalhos */
+h2 {
+  font-weight: 600;
+  font-size: clamp(20px, 2vw, 24px);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--success);
+  padding-bottom: 8px;
+  color: var(--text-light);
+}
+
+/* Form container */
+.form-container {
+  padding: 30px 40px;
+  background: var(--primary);
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+  margin-bottom: 40px;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #222;
+  color: #fff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--success);
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+}
+
+/* Botões */
+.btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: 14px 0;
+  width: 100%;
+  font-size: clamp(16px, 1.2vw, 18px);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: var(--success-dark);
+}
+
+/* Logout */
+.btn-logout {
+  background: var(--danger);
+  padding: 10px 18px;
+  width: auto;
+  font-size: 14px;
+  border-radius: 8px;
+  float: right;
+  font-weight: 600;
+  color: white;
+}
+
+.btn-logout:hover {
+  background: var(--danger-dark);
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  font-size: 16px;
+  background-color: #2a2a2a;
+  color: #000000;
+  border-radius: 14px;
+}
+
+thead tr {
+  background: #000;
+  color: #fff;
+}
+
+thead th {
+  padding: 14px 20px;
+}
+
+tbody tr:hover {
+  background-color: #333;
+}
+
+tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #444;
+}
+
+/* Botão de saída */
+.btn-exit {
+  padding: 8px 14px;
+  background-color: var(--success);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-exit:hover {
+  background-color: var(--success-dark);
+}
+
+/* Painel admin */
+.admin-panel {
+  margin-top: 50px;
+  background: var(--primary-dark);
+  padding: 28px 36px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.stat {
+  flex: 1 1 200px;
+  background: url('https://www.transparenttextures.com/patterns/black-linen.png') repeat;
+  padding: 20px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+.stat h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.stat p {
+  font-size: 24px;
+}
+
+/* Botão limpar histórico */
+.clear-history {
+  margin: 40px 0 20px;
+  text-align: center;
+}
+
+#clearHistoryButton {
+  background: var(--warning);
+  border: none;
+  padding: 16px 28px;
+  font-size: 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  color: white;
+}
+
+#clearHistoryButton:hover {
+  background-color: var(--warning-dark);
+}
+
+/* Responsivo */
+@media (max-width: 720px) {
+  .container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .stat {
+    margin-bottom: 20px;
+  }
+}

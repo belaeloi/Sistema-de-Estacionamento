@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema de Estacionamento</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+   <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 h-screen fixed top-0 left-0 bg-gray-800 text-white p-6 flex flex-col">
+    <h1 class="text-3xl font-bold mb-10">ParkSeguro</h1>
+    <nav class="flex flex-col space-y-5 flex-grow">
+      <a href="index.html">Menu</a>
+      <a href="usuarios.html" class="hover:underline">Administradores</a>
+      <a href="vagas.html" class="hover:underline">Vagas</a>
+      <a href="registros.html" class="hover:underline">Registros</a>
+      
+    </nav>
+    <button
+      onclick="logout()"
+      class="mt-auto bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+    >Sair</button>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <main class="ml-64 p-8 max-w-7xl mx-auto">
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-5">Selecione uma vaga</h2>
+
+      <div class="grid grid-cols-5 gap-4">
+        <button
+          class="vaga bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition ring-offset-2 focus:outline-none focus:ring-4 focus:ring-blue-400"
+          data-vaga="1"
+          data-tipo="pequeno"
+          aria-label="Vaga 1 para veículo pequeno"
+          type="button"
+     
+
+        >1
+
+
+      </button>
+
+     
+
+        <button
+          class="vaga bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded transition ring-offset-2 focus:outline-none focus:ring-4 focus:ring-blue-400"
+          data-vaga="2"
+          data-tipo="medio"
+          aria-label="Vaga 2 para veículo médio"
+          type="button"
+        >2 
+      </button>
+
+        <button
+          class="vaga bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded transition ring-offset-2 focus:outline-none focus:ring-4 focus:ring-blue-400"
+          data-vaga="3"
+          data-tipo="grande"
+          aria-label="Vaga 3 para veículo grande"
+          type="button"
+        >3</button>
+
+        <button
+          class="vaga bg-gray-400 cursor-not-allowed text-white font-bold py-3 rounded"
+          aria-label="Vaga 4 indisponível"
+          disabled
+          data-tipo="indisponivel"
+          type="button"
+        >4</button>
+      </div>
+    </section>
+
+    <!-- Formulário para registrar entrada -->
+    <section class="mb-10 max-w-md">
+      <h2 class="text-2xl font-semibold mb-5">Registrar Entrada</h2>
+      <form id="formRegistro" class="bg-white p-6 rounded shadow-md">
+        <input type="hidden" id="vagaSelecionada" />
+
+        <div class="mb-4">
+          <label for="nome" class="block text-sm font-medium mb-1">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="placa" class="block text-sm font-medium mb-1">Placa</label>
+          <input
+            type="text"
+            id="placa"
+            name="placa"
+            maxlength="8"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div class="mb-6">
+          <label for="tipo" class="block text-sm font-medium mb-1">Tipo de Veículo</label>
+          <select
+            id="tipo"
+            name="tipo"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          >
+            <option value="" disabled selected>Selecione o tipo</option>
+            <option value="carro">Carro</option>
+            <option value="moto">Moto</option>
+            <option value="caminhão">Caminhão</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded"
+          disabled
+          id="btnRegistrar"
+        >
+          Registrar Entrada
+        </button>
+      </form>
+      <p id="msgVaga" class="mt-2 text-sm text-red-600 hidden">Selecione uma vaga disponível antes de registrar.</p>
+    </section>
+
+    <!-- Lista de veículos estacionados -->
+    <section class="mb-10 max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-5">Veículos Estacionados</h2>
+      <table class="min-w-full bg-white rounded shadow overflow-hidden">
+        <thead class="bg-blue-900 text-white">
+          <tr>
+            <th class="text-left py-3 px-4">Vaga</th>
+            <th class="text-left py-3 px-4">Nome</th>
+            <th class="text-left py-3 px-4">Placa</th>
+            <th class="text-left py-3 px-4">Tipo</th>
+            <th class="text-left py-3 px-4">Entrada</th>
+            <th class="text-left py-3 px-4">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyVeiculos">
+          <!-- Conteúdo dinâmico -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Painel Administrativo -->
+    <section class="max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-5">Painel Administrativo</h2>
+      <div class="grid grid-cols-4 gap-6 text-center">
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold mb-2">Veículos Estacionados</h3>
+          <p id="totalVeiculos" class="text-3xl">0</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold mb-2">Total Arrecadado (R$)</h3>
+          <p id="totalArrecadado" class="text-3xl">0,00</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold mb-2">Última Entrada</h3>
+          <p id="ultimaEntrada">—</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold mb-2">Registros no Histórico</h3>
+          <p id="totalHistorico">0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Histórico -->
+    <section class="mt-10 max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-5">Histórico de Veículos</h2>
+      <table class="min-w-full bg-white rounded shadow overflow-hidden mb-4">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="text-left py-3 px-4">Vaga</th>
+            <th class="text-left py-3 px-4">Nome</th>
+            <th class="text-left py-3 px-4">Placa</th>
+            <th class="text-left py-3 px-4">Tempo (minutos)</th>
+            <th class="text-left py-3 px-4">Valor Pago (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyHistorico">
+          <!-- Conteúdo dinâmico -->
+        </tbody>
+      </table>
+      <button
+        id="btnLimparHistorico"
+        class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded"
+      >
+        Limpar Histórico
+      </button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

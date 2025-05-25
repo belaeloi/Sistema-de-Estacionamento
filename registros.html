@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registros</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #060606;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #050505; /* Azul forte */
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3);
+}
+
+.nav-link {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.nav-link:hover {
+  border-bottom-color: #60a5fa; /* Azul claro */
+}
+
+.nav-link.active {
+  border-bottom-color: #60a5fa;
+  font-weight: 700;
+}
+
+/* Container principal */
+.container {
+  flex-grow: 1;
+  max-width: 900px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+}
+
+/* Título */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #0a0a0a;
+}
+
+/* Filtro */
+.label-filtro {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input-filtro {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-filtro:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(4, 4, 4, 0.5);
+}
+
+/* Tabela */
+.table-wrapper {
+  margin-top: 2rem;
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+thead {
+  background-color: #28088f;
+  color: white;
+  font-weight: 700;
+}
+
+thead th {
+  padding: 12px 16px;
+  text-align: left;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 3px solid #2563eb;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background-color: #f3f4f6;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sem-registros {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-900 p-4 flex space-x-6 text-white">
+    <a href="index.html" class="hover:underline">Menu</a>
+    <a href="usuarios.html" class="hover:underline">Administradores</a>
+    <a href="registros.html" class="font-semibold underline">Registros</a>
+    <a href="vagas.html">Vagas</a>
+  </nav>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <header class="mb-6">
+      <h1 class="text-4xl font-extrabold text-gray-900 mb-4">📋 Registros</h1>
+
+      <!-- Filtro por usuário -->
+      <label for="filtro-usuario" class="block mb-2 font-semibold text-gray-700">Filtrar por cliente:</label>
+      <input
+        id="filtro-usuario"
+        type="text"
+        placeholder="Digite o nome do cliente..."
+        class="w-full max-w-sm px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </header>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-blue-900 text-white">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold uppercase">Cliente</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold uppercase">Vaga</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold uppercase">Data Início</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold uppercase">Data Fim</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-registros" class="divide-y divide-gray-100 text-gray-700">
+          <!-- JS vai inserir registros aqui -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="registros.js"></script>
+</body>
+</html>
