@@ -17,7 +17,7 @@ Permite selecionar múltiplas vagas, registrar entradas e saídas, calcular valo
 ## Como usar
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seuusuario/seurepositorio.git
+    git clone https://github.com/belaeloi/Sistema-de-Estacionamento.git
     ```
 2. Abra o arquivo `login.html` no seu navegador.
 3. Faça login com o usuario admin e senha 1234.
